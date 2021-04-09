@@ -1,7 +1,7 @@
 import React from "react";
 
 export default (props) => (
-  <div className="container">
+  <div>
     <h1>List</h1>
   </div>
 );
