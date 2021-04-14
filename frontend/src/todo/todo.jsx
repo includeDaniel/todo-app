@@ -30,7 +30,7 @@ export default class Todo extends Component {
     axios
       .get(`${URL}?sort=-createdAt${search}`)
       .then((resp) =>
-        this.setState({ ...this.state, description: "", list: resp.data })
+        this.setState({ ...this.state, description, list: resp.data })
       );
   }
 
@@ -48,18 +48,20 @@ export default class Todo extends Component {
   }
 
   handleRemove(todo) {
-    axios.delete(`${URL}/${todo._id}`).then((resp) => this.refresh());
+    axios
+      .delete(`${URL}/${todo._id}`)
+      .then((resp) => this.refresh(this.state.description));
   }
 
   handleMarkAsDone(todo) {
     axios
       .put(`${URL}/${todo._id}`, { ...todo, done: true })
-      .then((resp) => this.refresh());
+      .then((resp) => this.refresh(this.state.description));
   }
   handleMarkAsPending(todo) {
     axios
       .put(`${URL}/${todo._id}`, { ...todo, done: false })
-      .then((resp) => this.refresh());
+      .then((resp) => this.refresh(this.state.description));
   }
 
   render() {
