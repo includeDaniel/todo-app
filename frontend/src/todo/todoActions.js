@@ -17,8 +17,8 @@ export const search = () => {
 
 export const add = (description) => {
     const request = axios.post(URL, { description })
-    return {
+    return [{
         type: 'TODO_ADDED',
         payload: request
-    }
+    }, search()]
 }
